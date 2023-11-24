@@ -1,0 +1,39 @@
+version: '3.7'
+
+services:
+  postgres_sistema_internos:
+    image: postgres
+    restart: always
+    environment:
+      - POSTGRES_DB=sistemasinternosdb
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    container_name: sist_internos_postgres
+    volumes:
+      - sist_internos_bd_volume:/data/db
+    ports:
+      - 5432:5432
+    networks:
+      - sist_internos_db
+
+  api_sist_internos:
+    image: sist_internos_api:latest
+    build:
+      context: .  
+      dockerfile: Dockerfile
+    container_name: sist_internos
+    depends_on:
+      - postgres_sistema_internos
+    ports:
+      - 3333:3333
+    networks:
+      - qualitygate
+      - sist_internos_db
+
+volumes:
+  sist_internos_bd_volume:
+
+networks:
+  qualitygate:
+    external: true
+  sist_internos_db:

@@ -1,0 +1,19 @@
+.vscode/
+
+# dependencies
+node_modules
+dist
+
+# testing
+/coverage
+/html
+
+# logs
+nodeexpressboilerplate.log
+
+package-lock.json
+yarn.lock
+yarn-error.log
+.env
+
+

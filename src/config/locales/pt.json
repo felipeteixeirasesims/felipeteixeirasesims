@@ -1,0 +1,10 @@
+{
+	"Invalid email": "Email Inválido",
+	"String must contain at least 6 character(s)": "A senha deve conter pelo menos 6 caracteres",
+	"Invalid token!": "Token inválido!",
+	"Invalid refresh token!": "Token de atualização inválido!",
+	"Forbidden Access!": "Acesso Proibido!",
+	"Incorrect email and password combination!": "Combinação de email e senha incorreta!",
+	"E-mail address already exists!": "O e-mail já existe!",
+	"Token is missing": "Token is missing"
+}

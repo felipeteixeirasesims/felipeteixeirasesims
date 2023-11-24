@@ -1,0 +1,20 @@
+{
+	"Invalid email": "Invalid email",
+	"String must contain at least 6 character(s)": "String must contain at least 6 character(s)",
+	"Invalid token!": "Invalid token!",
+	"Invalid refresh token!": "Invalid refresh token!",
+	"Forbidden Access!": "Forbidden Access!",
+	"Incorrect email and password combination!": "Incorrect email and password combination!",
+	"E-mail address already exists!": "E-mail address already exists!",
+	"Token is missing": "Token is missing",
+	"Required": "Required",
+	"Expected date, received string": "Expected date, received string",
+	"Expected object, received string": "Expected object, received string",
+	"Expected string, received null": "Expected string, received null",
+	"User has associated sessions": "User has associated sessions",
+	"User has associated phones": "User has associated phones",
+	"User doesn't exist": "User doesn't exist",
+	"User name already in use": "User name already in use",
+	"Project name already exists": "Project name already exists",
+	"Project not exists": "Project not exists"
+}
