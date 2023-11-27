@@ -140,8 +140,8 @@ model UserFavorite {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  project Prompt? @relation(fields: [promptId], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  user    User?   @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  prompt Prompt? @relation(fields: [promptId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  user   User?   @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
 
   @@id([userId, promptId])
   @@map("userfavorites")
@@ -164,7 +164,7 @@ model Input {
   updatedAt        DateTime           @updatedAt
   InputAlternative InputAlternative[]
 
-  @@map("input")
+  @@map("inputs")
 }
 
 model InputAlternative {

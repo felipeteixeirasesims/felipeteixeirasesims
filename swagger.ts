@@ -5,18 +5,18 @@ const endpointsFiles = ['./src/shared/app.ts'];
 const doc = {
   openapi: '3.0.0',
   info: {
-    title: 'Boilerplate Documentation',
+    title: 'CoTeachAI Documentation',
     description: 'This is an API REST',
-    version: "1.0.0",
+    version: '1.0.0',
     contact: {
-      email: "isi.tics@sistemafiepe.org.br"
+      email: 'isi.tics@sistemafiepe.org.br'
     }
   },
   securityDefinitions: {
     bearerAuth: {
       type: 'http',
       scheme: 'bearer',
-      in: "header",
+      in: 'header',
       bearerFormat: 'JWT'
     }
   },
@@ -26,55 +26,55 @@ const doc = {
   components: {
     '@schemas': {
       User: {
-        type: "object",
-        required: ["name", "email", "password"],
+        type: 'object',
+        required: ['name', 'email', 'password'],
         properties: {
           id: {
-            type: "string",
-            format: "uuid",
-            description: "The auto generate uuid of the User"
+            type: 'string',
+            format: 'uuid',
+            description: 'The auto generate uuid of the User'
           },
           name: {
-            type: "sting",
-            description: "The name of the User"
+            type: 'sting',
+            description: 'The name of the User'
           },
           email: {
-            type: "string",
-            description: "The email of the User"
+            type: 'string',
+            description: 'The email of the User'
           },
           role: {
-            type: "object",
+            type: 'object',
             properties: {
               id: {
-                type: "string",
-                format: "uuid",
-                description: "The auto generate uuid of the Role"
+                type: 'string',
+                format: 'uuid',
+                description: 'The auto generate uuid of the Role'
               },
               name: {
-                type: "string",
-                description: "The name of the Role"
+                type: 'string',
+                description: 'The name of the Role'
               },
               created_at: {
-                type: "string",
-                format: "date-time",
-                description: "The creation date of the Role"
+                type: 'string',
+                format: 'date-time',
+                description: 'The creation date of the Role'
               },
               updated_at: {
-                type: "string",
-                format: "date-time",
-                description: "The update date of the Role"
+                type: 'string',
+                format: 'date-time',
+                description: 'The update date of the Role'
               }
             }
           },
           created_at: {
-            type: "string",
-            format: "date-time",
-            description: "The creation date of the User"
+            type: 'string',
+            format: 'date-time',
+            description: 'The creation date of the User'
           },
           updated_at: {
-            type: "string",
-            format: "date-time",
-            description: "The update date of the User"
+            type: 'string',
+            format: 'date-time',
+            description: 'The update date of the User'
           }
         }
       },

@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "Boilerplate Documentation",
+    "title": "CoTeachAI Documentation",
     "description": "This is an API REST",
     "version": "1.0.0",
     "contact": {
@@ -23,14 +23,7 @@
         "description": "",
         "parameters": [
           {
-            "name": "name",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "roleId",
+            "name": "firstName",
             "in": "query",
             "schema": {
               "type": "string"
@@ -49,6 +42,20 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "sortBy",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -63,16 +70,25 @@
         ]
       },
       "post": {
+        "tags": [
+          "User"
+        ],
         "description": "",
         "responses": {
           "201": {
             "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
           }
         }
       }
     },
     "/users/me": {
       "get": {
+        "tags": [
+          "User"
+        ],
         "description": "",
         "responses": {
           "200": {
@@ -83,6 +99,9 @@
     },
     "/users/{id}": {
       "put": {
+        "tags": [
+          "User"
+        ],
         "description": "",
         "parameters": [
           {
@@ -105,7 +124,10 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "name": {
+                  "firstName": {
+                    "example": "any"
+                  },
+                  "lastName": {
                     "example": "any"
                   },
                   "email": {
@@ -114,7 +136,16 @@
                   "password": {
                     "example": "any"
                   },
+                  "dateOfBirth": {
+                    "example": "any"
+                  },
+                  "phones": {
+                    "example": "any"
+                  },
                   "roleId": {
+                    "example": "any"
+                  },
+                  "supervisorId": {
                     "example": "any"
                   }
                 }
@@ -124,6 +155,9 @@
         }
       },
       "delete": {
+        "tags": [
+          "User"
+        ],
         "description": "",
         "parameters": [
           {
@@ -144,6 +178,9 @@
     },
     "/roles/": {
       "get": {
+        "tags": [
+          "Role"
+        ],
         "description": "",
         "parameters": [
           {
@@ -210,6 +247,9 @@
     },
     "/sessions/refresh-token": {
       "post": {
+        "tags": [
+          "Session"
+        ],
         "description": "",
         "responses": {
           "200": {
@@ -232,8 +272,11 @@
         }
       }
     },
-    "/projects/": {
+    "/prompts/": {
       "get": {
+        "tags": [
+          "Prompt"
+        ],
         "description": "",
         "parameters": [
           {
@@ -265,16 +308,54 @@
         }
       },
       "post": {
+        "tags": [
+          "Prompt"
+        ],
         "description": "",
         "responses": {
           "201": {
             "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "example": "any"
+                  },
+                  "description": {
+                    "example": "any"
+                  },
+                  "prompt": {
+                    "example": "any"
+                  },
+                  "outputType": {
+                    "example": "any"
+                  },
+                  "creatorId": {
+                    "example": "any"
+                  },
+                  "categoryId": {
+                    "example": "any"
+                  }
+                }
+              }
+            }
           }
         }
       }
     },
-    "/budgets/": {
+    "/categories/": {
       "get": {
+        "tags": [
+          "Category"
+        ],
         "description": "",
         "parameters": [
           {
@@ -306,16 +387,42 @@
         }
       },
       "post": {
+        "tags": [
+          "Category"
+        ],
         "description": "",
         "responses": {
           "201": {
             "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "example": "any"
+                  },
+                  "description": {
+                    "example": "any"
+                  }
+                }
+              }
+            }
           }
         }
       }
     },
     "/loggers/": {
       "get": {
+        "tags": [
+          "Logger"
+        ],
         "description": "",
         "parameters": [
           {
