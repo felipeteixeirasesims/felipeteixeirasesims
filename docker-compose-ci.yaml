@@ -1,14 +1,14 @@
 version: '3.7'
 
 services:
-  sistemas_internos_postgres:
-    image: postgres:12-alpine
-    restart: unless-stopped
+  database:
+    image: postgres:15.5-alpine3.18
+    restart: always
     environment:
       - POSTGRES_DB=${DB_NAME}
       - POSTGRES_USER=${DB_USERNAME}
       - POSTGRES_PASSWORD=${DB_PASSWORD}
-    container_name: sistemas_internos_postgres
+    container_name: ${DB_CONTAINER_NAME}
     volumes:
       - pg_data:/var/lib/postgresql/data
     expose:
@@ -16,13 +16,14 @@ services:
     networks:
       - db
 
-  sistemas_internos_api:
+  api:
     image: ${DOCKER_IMAGE}
     container_name: ${CONTAINER_NAME}
+    restart: always
     env_file:
       - .env
     depends_on:
-      - sistemas_internos_postgres
+      - database
     expose:
       - 3333
     networks:

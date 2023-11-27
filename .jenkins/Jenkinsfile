@@ -1,14 +1,5 @@
-@Library('jenkins_lib@master')
-import br.com.isi.Commands
-import br.com.isi.ProjectMetadata
+@Library('new-jenkins-lib') _
 
-def projectMetadata = new ProjectMetadata();
-def cmd = new Commands();
-
-projectMetadata.projectName = "sistemasinternos-api"
-projectMetadata.dockerfile = "Dockerfile"
-projectMetadata.language = "sistemasinternos"
-projectMetadata.version = "1.0"
-projectMetadata.sourcesPath = "src"
-
-cmd.exec(projectMetadata);
+coteachaiPipeline(
+	projectName: "coteachai-be"
+)
