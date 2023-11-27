@@ -7,17 +7,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Budget {
-  id        String   @id @default(uuid())
-  amount    Float    @db.DoublePrecision
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  projectId String   @db.VarChar(36)
-  project   Project? @relation(fields: [projectId], references: [id], onDelete: NoAction, onUpdate: NoAction)
-
-  @@map("budgets")
-}
-
 model Phone {
   id        String   @default(uuid())
   phone     String   @db.VarChar(16)
@@ -27,33 +16,74 @@ model Phone {
   user      User?    @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: NoAction)
 
   @@id([id, userId])
-
   @@map("phones")
 }
 
-enum ReadinessLevel {
-  ONE
-  TWO
-  THREE
-  FOUR
-  FIVE
-  SIX
-  SEVEN
-  EIGHT
-  NINE
+enum OutputType {
+  HTML
+  RICH_TEXT
+  TEXT
 }
 
-model Project {
-  id             String          @id @default(uuid())
-  name           String          @unique @db.VarChar(50)
-  description    String?         @db.VarChar(100)
-  readinessLevel ReadinessLevel  @unique @default(ONE)
-  createdAt      DateTime        @default(now())
-  updatedAt      DateTime        @updatedAt
-  budgets        Budget[]
-  users          UserProject[]
+model Category {
+  id          String   @id @default(uuid())
+  name        String   @unique @db.VarChar(50)
+  description String?  @db.VarChar(100)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  Prompt      Prompt[]
 
-  @@map("projects")
+  @@map("categories")
+}
+
+model Prompt {
+  id          String     @id @default(uuid())
+  title       String     @unique @db.VarChar(50)
+  description String?    @db.VarChar(100)
+  prompt      String?    @db.VarChar(255)
+  outputType  OutputType @default(HTML)
+  creatorId   String
+  categoryId  String?
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+
+  creator      User?          @relation(fields: [creatorId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  category     Category?      @relation(fields: [categoryId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  PromptRemake PromptRemake[]
+  PromptResult PromptResult[]
+  UserFavorite UserFavorite[]
+
+  @@map("prompts")
+}
+
+model PromptRemake {
+  id        String   @id @default(uuid())
+  promptId  String   @db.VarChar(36)
+  guidance  String?  @db.VarChar(255)
+  excerpt   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  prompt       Prompt?        @relation(fields: [promptId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  PromptResult PromptResult[]
+
+  @@map("promptremakes")
+}
+
+model PromptResult {
+  id               String   @id @default(uuid())
+  title            String   @db.VarChar(50)
+  promptId         String   @db.VarChar(36)
+  remakeId         String?
+  used_prompt      String
+  generated_output String
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  prompt Prompt?       @relation(fields: [promptId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  remake PromptRemake? @relation(fields: [remakeId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@map("promptresults")
 }
 
 model Role {
@@ -80,36 +110,72 @@ model Session {
 }
 
 model User {
-  id            String          @id @default(uuid())
-  firstName     String          @db.VarChar(20)
-  lastName      String          @db.VarChar(50)
-  email         String          @unique @db.VarChar(100)
-  password      String          @db.VarChar
-  dateOfBirth   DateTime        @db.Date
-  createdAt     DateTime        @default(now())
-  updatedAt     DateTime        @updatedAt
-  roleId        String          @db.VarChar(36)
-  supervisorId  String?         @db.VarChar(36)
-  phones        Phone[]
-  sessions      Session[]
-  role          Role?           @relation(fields: [roleId], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  supervisor    User?           @relation("usersTousers", fields: [supervisorId], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  supervised    User[]          @relation("usersTousers")
-  projects      UserProject[]
+  id          String    @id @default(uuid())
+  firstName   String    @db.VarChar(20)
+  lastName    String    @db.VarChar(50)
+  email       String    @unique @db.VarChar(100)
+  password    String    @db.VarChar
+  dateOfBirth DateTime  @db.Date
+  roleId      String    @db.VarChar(36)
+  school      String?   @db.VarChar(100)
+  grade       String?   @db.VarChar(100)
+  country     String?   @db.VarChar(100)
+  state       String?   @db.VarChar(100)
+  city        String?   @db.VarChar(100)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  phones      Phone[]
+  sessions    Session[]
+
+  role         Role?          @relation(fields: [roleId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  Prompt       Prompt[]
+  UserFavorite UserFavorite[]
 
   @@map("users")
 }
 
-model UserProject {
-  hoursAllocated Int
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
-  userId         String   @db.VarChar(36)
-  projectId      String   @db.VarChar(36)
-  project        Project? @relation(fields: [projectId], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  user           User?    @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+model UserFavorite {
+  userId    String   @db.VarChar(36)
+  promptId  String   @db.VarChar(36)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-  @@id([userId, projectId])
+  project Prompt? @relation(fields: [promptId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  user    User?   @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
 
-  @@map("usersprojects")
+  @@id([userId, promptId])
+  @@map("userfavorites")
+}
+
+enum InputType {
+  TEXT_FIELD
+  CHOICE_FIELD
+  MULTIPLE_CHOICE_FIELD
+}
+
+model Input {
+  id               String             @id @default(uuid())
+  title            String             @db.VarChar(30)
+  type             InputType          @default(TEXT_FIELD)
+  value            String?            @db.VarChar(50)
+  order            Int                @default(0)
+  required         Boolean            @default(false)
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
+  InputAlternative InputAlternative[]
+
+  @@map("input")
+}
+
+model InputAlternative {
+  id          String   @id @default(uuid())
+  inputId     String   @db.VarChar(36)
+  description String   @db.VarChar(50)
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  input Input @relation(fields: [inputId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@map("inputalternatives")
 }
