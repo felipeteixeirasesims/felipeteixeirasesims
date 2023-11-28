@@ -88,7 +88,7 @@
   },
   "config": {
     "commitizen": {
-      "path": "./node_modules/@digitalroute/cz-conventional-changelog"
+      "path": "cz-conventional-changelog"
     }
   }
 }
