@@ -136,7 +136,7 @@ model User {
 
 model UserFavorite {
   userId    String   @db.VarChar(36)
-  promptId  String   @db.VarChar(36)
+  promptId  String   @unique @db.VarChar(36)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
