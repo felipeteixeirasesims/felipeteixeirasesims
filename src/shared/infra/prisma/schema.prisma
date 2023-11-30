@@ -52,6 +52,7 @@ model Prompt {
   PromptRemake PromptRemake[]
   PromptResult PromptResult[]
   UserFavorite UserFavorite[]
+  Input        Input[]
 
   @@map("prompts")
 }
@@ -155,6 +156,7 @@ enum InputType {
 
 model Input {
   id               String             @id @default(uuid())
+  promptId         String             @db.VarChar(36)
   title            String             @db.VarChar(30)
   type             InputType          @default(TEXT_FIELD)
   value            String?            @db.VarChar(50)
@@ -163,6 +165,8 @@ model Input {
   createdAt        DateTime           @default(now())
   updatedAt        DateTime           @updatedAt
   InputAlternative InputAlternative[]
+
+  prompt Prompt? @relation(fields: [promptId], references: [id], onDelete: NoAction, onUpdate: NoAction)
 
   @@map("inputs")
 }
