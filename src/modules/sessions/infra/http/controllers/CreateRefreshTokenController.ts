@@ -5,10 +5,11 @@ import { container } from 'tsyringe';
 
 class CreateRefreshTokenController {
   async handle(request: Request, response: Response): Promise<Response> {
+    /**
+     * #swagger.tags=['Session']
+     */
     const { refreshToken } = request.body;
-    const refreshTokenService = container.resolve(
-      CreateRefreshTokenService
-    );
+    const refreshTokenService = container.resolve(CreateRefreshTokenService);
 
     const token = await refreshTokenService.execute(refreshToken);
 

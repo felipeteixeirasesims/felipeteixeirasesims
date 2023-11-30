@@ -1,13 +1,13 @@
-import { inject, injectable } from 'tsyringe';
+import auth from '@config/auth';
+import Logger from '@config/logger';
+import ISessionRepository from '@modules/sessions/repositories/ISessionRepository';
+import IUserRepository from '@modules/users/repositories/IUserRepository';
+import { IDateProvider } from '@shared/container/providers/DateProvider/IDateProvider';
+import AppError from '@shared/errors/AppError';
+import User from '@shared/infra/http/entities/User';
 import { compare } from 'bcryptjs';
 import { sign } from 'jsonwebtoken';
-import auth from '@config/auth';
-import AppError from '@shared/errors/AppError';
-import Logger from '@config/logger';
-import User from '@shared/infra/http/entities/User';
-import IUserRepository from '@modules/users/repositories/IUserRepository';
-import ISessionRepository from '@modules/sessions/repositories/ISessionRepository';
-import { IDateProvider } from '@shared/container/providers/DateProvider/IDateProvider';
+import { inject, injectable } from 'tsyringe';
 
 interface IRequest {
   email: string;
@@ -34,7 +34,7 @@ class CreateSessionService {
   public async execute({ email, password }: IRequest): Promise<IResponse> {
     const user = await this.usersRepository.findByEmail(email);
 
-    const codeError = 'invalid_login'
+    const codeError = 'invalid_login';
     const messageError = 'Incorrect email and password combination!';
     if (!user) {
       Logger.error(messageError);

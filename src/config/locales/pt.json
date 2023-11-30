@@ -6,5 +6,9 @@
 	"Forbidden Access!": "Acesso Proibido!",
 	"Incorrect email and password combination!": "Combinação de email e senha incorreta!",
 	"E-mail address already exists!": "O e-mail já existe!",
-	"Token is missing": "Token is missing"
+	"Token is missing": "O token está faltando",
+	"Required": "Obrigatório",
+	"Prompt name already exists": "O nome do prompt já existe",
+	"Title is required": "O titulo é obrigatório",
+	"Prompt type already exists": "O tipo do prompt já existe",
 }

@@ -6,6 +6,9 @@ export default class CreateUserController {
   constructor(private service?: CreateUserService) {}
 
   public async handle(request: Request, response: Response): Promise<Response> {
+    /**
+     * #swagger.tags=['User']
+     */
     const data = request.body;
 
     this.service = container.resolve(CreateUserService);
