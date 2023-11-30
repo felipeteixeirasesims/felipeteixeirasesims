@@ -10,6 +10,8 @@ import IRoleRepository from '@modules/roles/repositories/IRoleRepository';
 import RolesRepository from '@modules/roles/repositories/RolesRepository';
 import ISessionRepository from '@modules/sessions/repositories/ISessionRepository';
 import SessionsRepository from '@modules/sessions/repositories/SessionsPrismaRepository';
+import IUserFavoritesRepository from '@modules/userfavorites/repositories/IUserFavoritesRepository';
+import UserFavoritesRepository from '@modules/userfavorites/repositories/UserFavoritesRepository';
 import IUserRepository from '@modules/users/repositories/IUserRepository';
 import UsersRepository from '@modules/users/repositories/UsersRepository';
 import { IDateProvider } from '@shared/container/providers/DateProvider/IDateProvider';
@@ -49,6 +51,11 @@ container.registerSingleton<IPromptRemakeRepository>(
 container.registerSingleton<ICategoryRepository>(
   'CategoryRepository',
   CategoryRepository
+);
+
+container.registerSingleton<IUserFavoritesRepository>(
+  'UserFavoritesRepository',
+  UserFavoritesRepository
 );
 
 container.registerSingleton<IDateProvider>(
