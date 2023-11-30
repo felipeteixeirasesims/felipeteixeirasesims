@@ -52,6 +52,7 @@ model Prompt {
   PromptRemake PromptRemake[]
   PromptResult PromptResult[]
   UserFavorite UserFavorite[]
+  Input        Input[]
 
   @@map("prompts")
 }
@@ -59,13 +60,14 @@ model Prompt {
 model PromptRemake {
   id        String   @id @default(uuid())
   promptId  String   @db.VarChar(36)
+  userId    String   @db.VarChar(36)
   guidance  String?  @db.VarChar(255)
   excerpt   String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  prompt       Prompt?        @relation(fields: [promptId], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  PromptResult PromptResult[]
+  prompt Prompt? @relation(fields: [promptId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  user   User?   @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: NoAction)
 
   @@map("promptremakes")
 }
@@ -74,14 +76,14 @@ model PromptResult {
   id               String   @id @default(uuid())
   title            String   @db.VarChar(50)
   promptId         String   @db.VarChar(36)
-  remakeId         String?
+  userId           String   @db.VarChar(36)
   used_prompt      String
   generated_output String
   createdAt        DateTime @default(now())
   updatedAt        DateTime @updatedAt
 
-  prompt Prompt?       @relation(fields: [promptId], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  remake PromptRemake? @relation(fields: [remakeId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  prompt Prompt? @relation(fields: [promptId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  user   User?   @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: NoAction)
 
   @@map("promptresults")
 }
@@ -130,6 +132,8 @@ model User {
   role         Role?          @relation(fields: [roleId], references: [id], onDelete: NoAction, onUpdate: NoAction)
   Prompt       Prompt[]
   UserFavorite UserFavorite[]
+  PromptRemake PromptRemake[]
+  PromptResult PromptResult[]
 
   @@map("users")
 }
@@ -155,6 +159,7 @@ enum InputType {
 
 model Input {
   id               String             @id @default(uuid())
+  promptId         String             @db.VarChar(36)
   title            String             @db.VarChar(30)
   type             InputType          @default(TEXT_FIELD)
   value            String?            @db.VarChar(50)
@@ -163,6 +168,8 @@ model Input {
   createdAt        DateTime           @default(now())
   updatedAt        DateTime           @updatedAt
   InputAlternative InputAlternative[]
+
+  prompt Prompt? @relation(fields: [promptId], references: [id], onDelete: NoAction, onUpdate: NoAction)
 
   @@map("inputs")
 }

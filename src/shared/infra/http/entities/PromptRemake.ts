@@ -8,6 +8,7 @@ class PromptRemake {
 
   id: string;
   promptId: string;
+  userId: string;
   guidance?: string;
   excerpt: string;
   createdAt?: Date;

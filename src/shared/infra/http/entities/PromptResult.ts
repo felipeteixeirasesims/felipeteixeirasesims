@@ -1,6 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
 import Prompt from './Prompt';
-import PromptRemake from './PromptRemake';
 
 class PromptResult {
   constructor(id?: string) {
@@ -10,13 +9,11 @@ class PromptResult {
   id: string;
   title: string;
   promptId: string;
-  remakeId: string;
   used_prompt: string;
   generated_output: string;
   createdAt?: Date;
   updatedAt?: Date;
-  prompt: Prompt;
-  remake: PromptRemake;
+  prompt?: Prompt;
 }
 
 export default PromptResult;

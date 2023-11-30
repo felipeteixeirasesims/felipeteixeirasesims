@@ -1,7 +1,11 @@
 import CategoryRepository from '@modules/categories/repositories/CategoryRepository';
 import ICategoryRepository from '@modules/categories/repositories/ICategoryRepository';
+import IPromptRemakeRepository from '@modules/prompts/repositories/IPromptRemakeRepository';
 import IPromptRepository from '@modules/prompts/repositories/IPromptRepository';
+import IPromptResultRepository from '@modules/prompts/repositories/IPromptResultRepository';
+import PromptRemakeRepository from '@modules/prompts/repositories/PromptRemakeRepository';
 import PromptRepository from '@modules/prompts/repositories/PromptRepository';
+import PromptResultRepository from '@modules/prompts/repositories/PromptResultRepository';
 import IRoleRepository from '@modules/roles/repositories/IRoleRepository';
 import RolesRepository from '@modules/roles/repositories/RolesRepository';
 import ISessionRepository from '@modules/sessions/repositories/ISessionRepository';
@@ -32,6 +36,16 @@ container.registerSingleton<ISessionRepository>(
 container.registerSingleton<IPromptRepository>(
   'PromptRepository',
   PromptRepository
+);
+
+container.registerSingleton<IPromptResultRepository>(
+  'PromptResultRepository',
+  PromptResultRepository
+);
+
+container.registerSingleton<IPromptRemakeRepository>(
+  'PromptRemakeRepository',
+  PromptRemakeRepository
 );
 
 container.registerSingleton<ICategoryRepository>(

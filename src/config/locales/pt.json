@@ -16,5 +16,6 @@
 	"Category doesn't exist": "Categoria não existe",
 	"promptId is required": "promptId é obrigatório",
 	"User favorite doesn't exist": "O favorito do usuário não existe",
-	"userId is required": "userId is required"
+	"userId is required": "userId é obrigatório",
+	"Prompt result for this prompt doesn't exists": "O Prompt result desse prompt não existe"
 }

@@ -351,6 +351,76 @@
         }
       }
     },
+    "/prompts/result": {
+      "post": {
+        "tags": [
+          "Prompt"
+        ],
+        "description": "Endpoint to create a prompt result. This endpoint uses the API of the OpenAI to generate the prompt result.",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "promptId": {
+                    "example": "any"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/prompts/remake": {
+      "post": {
+        "tags": [
+          "Prompt"
+        ],
+        "description": "Endpoint to remake a excerpt of a prompt result. This endpoint will fail if the prompt doesn't have a prompt result.",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "promptId": {
+                    "example": "any"
+                  },
+                  "guidance": {
+                    "example": "any"
+                  },
+                  "excerpt": {
+                    "example": "any"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/categories/": {
       "get": {
         "tags": [
