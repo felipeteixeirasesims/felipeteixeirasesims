@@ -6,6 +6,7 @@ import IPromptRepository from '../repositories/IPromptRepository';
 import IPromptResultRepository from '../repositories/IPromptResultRepository';
 
 interface IRequestDTO {
+  userId: string;
   promptId: string;
 }
 
@@ -18,7 +19,10 @@ class PromptResultService {
     private promptResultRepository: IPromptResultRepository
   ) {}
 
-  public async execute({ promptId }: IRequestDTO): Promise<PromptResult> {
+  public async execute({
+    userId,
+    promptId
+  }: IRequestDTO): Promise<PromptResult> {
     const codeError = 'Invalid_list';
     const messageError = "Prompt doesn't exist";
     const promptResultError = 'Prompt result for this prompt already exists';
@@ -38,6 +42,7 @@ class PromptResultService {
     }
 
     const promptResultRepository = await this.promptResultRepository.create({
+      userId,
       title: promptRepository.title,
       promptId: promptRepository.id,
       used_prompt: promptRepository.prompt,

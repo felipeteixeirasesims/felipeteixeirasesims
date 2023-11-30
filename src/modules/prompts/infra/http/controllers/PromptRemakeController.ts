@@ -7,12 +7,16 @@ export default class PromptRemakeController {
     /**
      * #swagger.tags=['Prompt']
      * #swagger.description = "Endpoint to remake a excerpt of a prompt result. This endpoint will fail if the prompt doesn't have a prompt result."
+     * #swagger.security=[{"bearerAuth": []}]
      */
 
     const { promptId, guidance, excerpt } = request.body;
+    const { id: userId } = request.user;
+
     const promptRemakeService = container.resolve(PromptRemakeService);
 
     const categories = await promptRemakeService.execute({
+      userId,
       promptId,
       guidance,
       excerpt

@@ -1,3 +1,4 @@
+import ensureAuthenticated from '@shared/infra/http/middlewares/ensureAuthenticated';
 import { zodValidation } from '@shared/infra/http/middlewares/ensureValidation';
 import { Router } from 'express';
 import { z } from 'zod';
@@ -44,7 +45,15 @@ promptRouter.post(
   createPromptController.handle
 );
 
-promptRouter.post('/result', promptResultController.handle);
-promptRouter.post('/remake', promptRemakeController.handle);
+promptRouter.post(
+  '/result',
+  ensureAuthenticated,
+  promptResultController.handle
+);
+promptRouter.post(
+  '/remake',
+  ensureAuthenticated,
+  promptRemakeController.handle
+);
 
 export default promptRouter;

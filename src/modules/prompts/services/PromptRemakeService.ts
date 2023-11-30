@@ -7,6 +7,7 @@ import IPromptRepository from '../repositories/IPromptRepository';
 import IPromptResultRepository from '../repositories/IPromptResultRepository';
 
 interface IRequestDTO {
+  userId: string;
   promptId: string;
   guidance: string;
   excerpt: string;
@@ -24,6 +25,7 @@ class PromptRemakeService {
   ) {}
 
   public async execute({
+    userId,
     promptId,
     guidance,
     excerpt
@@ -47,6 +49,7 @@ class PromptRemakeService {
     }
 
     const promptRemakeRepository = await this.promptRemakeRepository.create({
+      userId,
       promptId: promptRepository.id,
       guidance,
       excerpt
