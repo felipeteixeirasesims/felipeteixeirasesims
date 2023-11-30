@@ -14,7 +14,7 @@ interface IRequestDTO extends IPaginationDTO {
 class IndexPromptService {
   constructor(
     @inject('PromptRepository')
-    private projectRepository: IPromptRepository
+    private promptRepository: IPromptRepository
   ) {}
 
   public async execute(
@@ -23,7 +23,7 @@ class IndexPromptService {
     const codeError = 'Invalid_list';
     const messageError = "Project doesn't exist";
 
-    const response = await this.projectRepository.all({ ...data });
+    const response = await this.promptRepository.all({ ...data });
     if (response.data) {
       return response;
     }

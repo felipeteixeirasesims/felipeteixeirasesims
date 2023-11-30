@@ -15,8 +15,8 @@ class PromptResult {
   generated_output: string;
   createdAt?: Date;
   updatedAt?: Date;
-  prompt: Prompt;
-  remake: PromptRemake;
+  prompt?: Prompt;
+  remake?: PromptRemake;
 }
 
 export default PromptResult;

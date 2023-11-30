@@ -11,4 +11,11 @@
 	"Prompt name already exists": "O nome do prompt já existe",
 	"Title is required": "O titulo é obrigatório",
 	"Prompt type already exists": "O tipo do prompt já existe",
+	"Name is required": "O nome é obrigatório",
+	"Description is required": "A descrição é obrigatório",
+	"Category doesn't exist": "Categoria não existe",
+	"promptId is required": "promptId é obrigatório",
+	"User favorite doesn't exist": "O favorito do usuário não existe",
+	"userId is required": "userId é obrigatório",
+	"Prompt result for this prompt doesn't exists": "O Prompt result desse prompt não existe"
 }

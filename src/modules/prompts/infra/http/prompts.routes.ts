@@ -3,12 +3,18 @@ import { Router } from 'express';
 import { z } from 'zod';
 import CreatePromptController from './controllers/CreatePromptController';
 import IndexPromptController from './controllers/IndexPromptController';
+import PromptRemakeController from './controllers/PromptRemakeController';
+import PromptResultController from './controllers/PromptResultController';
 
 const promptRouter = Router();
 
 const createPromptController = new CreatePromptController();
 
 const indexPromptController = new IndexPromptController();
+
+const promptRemakeController = new PromptRemakeController();
+
+const promptResultController = new PromptResultController();
 
 const dataSchema = z.object({
   body: z.object({
@@ -37,5 +43,8 @@ promptRouter.post(
   zodValidation(dataSchema),
   createPromptController.handle
 );
+
+promptRouter.post('/result', promptResultController.handle);
+promptRouter.post('/remake', promptRemakeController.handle);
 
 export default promptRouter;
