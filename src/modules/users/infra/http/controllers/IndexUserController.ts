@@ -19,6 +19,8 @@ export default class IndexUserController {
     /**
      * #swagger.tags=['User']
      * #swagger.security=[{"bearerAuth": []}]
+     * #swagger.summary='Get all users'
+     * #swagger.description='This endpoint will get all users ordered'
      */
     const { firstName, limit, page, sortBy, orderBy } = request.query;
     this.service = container.resolve(IndexUserService);

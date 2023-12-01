@@ -26,7 +26,7 @@ class IndexUserService {
     if (response.data) {
       return response;
     }
-   
+
     Logger.error(messageError);
     throw new AppError(codeError, messageError);
   }

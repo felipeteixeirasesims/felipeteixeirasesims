@@ -20,7 +20,8 @@
         "tags": [
           "User"
         ],
-        "description": "",
+        "summary": "Get all users",
+        "description": "This endpoint will get all users ordered",
         "parameters": [
           {
             "name": "firstName",
