@@ -38,7 +38,7 @@ const userSchema = z.object({
   ),
   roleId: z.string().uuid(),
   supervisorId: z.string().uuid().optional().nullable()
-  })  
+  })
 });
 
 usersRouter.get('/', ensureAuthenticated, isAdmin(), indexUserController.handle);
@@ -49,6 +49,6 @@ usersRouter.get('/me', ensureAuthenticated, showUserController.handle);
 
 usersRouter.put('/:id', ensureAuthenticated, updateUserController.handle);
 
-usersRouter.delete('/:id', ensureAuthenticated, deleteUserController.handle);
+usersRouter.delete('/:id', ensureAuthenticated, isAdmin(), deleteUserController.handle);
 
 export default usersRouter;

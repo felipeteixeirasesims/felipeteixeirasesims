@@ -14,6 +14,9 @@ export default class IndexProjectController {
     request: Request<unknown, unknown, unknown, ReqQuery>,
     response: Response
   ): Promise<Response> {
+    /**
+     * #swagger.tags=['Project']
+     */
     const { name, limit, page } = request.query;
     this.service = container.resolve(IndexProjectService);
 

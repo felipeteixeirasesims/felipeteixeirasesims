@@ -6,6 +6,9 @@ export default class CreateBudgetController {
   constructor(private service?: CreateBudgetService) {}
 
   public async handle(request: Request, response: Response): Promise<Response> {
+    /**
+     * #swagger.tags=['Budget']
+     */
     const data = request.body;
 
     this.service = container.resolve(CreateBudgetService);

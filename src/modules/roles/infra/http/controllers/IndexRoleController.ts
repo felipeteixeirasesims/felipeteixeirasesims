@@ -14,6 +14,9 @@ export default class IndexRoleController {
     request: Request<unknown, unknown, unknown, ReqQuery>,
     response: Response
   ): Promise<Response> {
+    /**
+     * #swagger.tags=['Role']
+     */
     const { name, limit, page } = request.query;
     this.service = container.resolve(IndexRoleService);
 

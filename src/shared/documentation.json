@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "Boilerplate Documentation",
+    "title": "CoTeachAi API Documentation",
     "description": "This is an API REST",
     "version": "1.0.0",
     "contact": {
@@ -20,17 +20,11 @@
         "tags": [
           "User"
         ],
-        "description": "",
+        "summary": "Get all users",
+        "description": "This endpoint will get all users ordered",
         "parameters": [
           {
-            "name": "name",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "roleId",
+            "name": "firstName",
             "in": "query",
             "schema": {
               "type": "string"
@@ -49,6 +43,20 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "sortBy",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -63,16 +71,26 @@
         ]
       },
       "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Create a new user",
         "description": "",
         "responses": {
           "201": {
             "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
           }
         }
       }
     },
     "/users/me": {
       "get": {
+        "tags": [
+          "User"
+        ],
         "description": "",
         "responses": {
           "200": {
@@ -83,6 +101,9 @@
     },
     "/users/{id}": {
       "put": {
+        "tags": [
+          "User"
+        ],
         "description": "",
         "parameters": [
           {
@@ -105,7 +126,10 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "name": {
+                  "firstName": {
+                    "example": "any"
+                  },
+                  "lastName": {
                     "example": "any"
                   },
                   "email": {
@@ -114,7 +138,16 @@
                   "password": {
                     "example": "any"
                   },
+                  "dateOfBirth": {
+                    "example": "any"
+                  },
+                  "phones": {
+                    "example": "any"
+                  },
                   "roleId": {
+                    "example": "any"
+                  },
+                  "supervisorId": {
                     "example": "any"
                   }
                 }
@@ -124,6 +157,9 @@
         }
       },
       "delete": {
+        "tags": [
+          "User"
+        ],
         "description": "",
         "parameters": [
           {
@@ -144,6 +180,9 @@
     },
     "/roles/": {
       "get": {
+        "tags": [
+          "Role"
+        ],
         "description": "",
         "parameters": [
           {
@@ -210,6 +249,9 @@
     },
     "/sessions/refresh-token": {
       "post": {
+        "tags": [
+          "Session"
+        ],
         "description": "",
         "responses": {
           "200": {
@@ -234,6 +276,9 @@
     },
     "/projects/": {
       "get": {
+        "tags": [
+          "Project"
+        ],
         "description": "",
         "parameters": [
           {
@@ -265,6 +310,9 @@
         }
       },
       "post": {
+        "tags": [
+          "Project"
+        ],
         "description": "",
         "responses": {
           "201": {
@@ -275,6 +323,9 @@
     },
     "/budgets/": {
       "get": {
+        "tags": [
+          "Budget"
+        ],
         "description": "",
         "parameters": [
           {
@@ -306,6 +357,9 @@
         }
       },
       "post": {
+        "tags": [
+          "Budget"
+        ],
         "description": "",
         "responses": {
           "201": {
@@ -316,6 +370,9 @@
     },
     "/loggers/": {
       "get": {
+        "tags": [
+          "Logger"
+        ],
         "description": "",
         "parameters": [
           {

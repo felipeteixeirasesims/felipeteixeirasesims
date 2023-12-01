@@ -6,5 +6,6 @@
 	"Forbidden Access!": "Acesso Proibido!",
 	"Incorrect email and password combination!": "Combinação de email e senha incorreta!",
 	"E-mail address already exists!": "O e-mail já existe!",
-	"Token is missing": "Token is missing"
+	"Token is missing": "Token is missing",
+	"Required": "Required"
 }

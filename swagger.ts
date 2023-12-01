@@ -5,7 +5,7 @@ const endpointsFiles = ['./src/shared/app.ts'];
 const doc = {
   openapi: '3.0.0',
   info: {
-    title: 'Boilerplate Documentation',
+    title: 'CoTeachAi API Documentation',
     description: 'This is an API REST',
     version: "1.0.0",
     contact: {

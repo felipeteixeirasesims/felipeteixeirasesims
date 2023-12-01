@@ -14,6 +14,9 @@ export default class IndexBudgetController {
     request: Request<unknown, unknown, unknown, ReqQuery>,
     response: Response
   ): Promise<Response> {
+    /**
+     * #swagger.tags=['Budget']
+     */
     const { amount, limit, page } = request.query;
     this.service = container.resolve(IndexBudgetService);
 
